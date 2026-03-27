@@ -1,9 +1,9 @@
 [
   {
-    "id": "post1",
+    "id": "post-1",
     "date": "2026-03-26",
-    "title": "Built a client-side login UI",
+    "title": "Simple Login Demo",
     "description": "Created a simple login flow with session persistence using localStorage.",
-    "skills": ["JavaScript","localStorage","UI"]
+    "skills": ["JavaScript", "localStorage", "UI"]
   }
 ]
