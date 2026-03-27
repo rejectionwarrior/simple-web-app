@@ -111,32 +111,34 @@
   </header>
 
   <main>
-    <section id="post-1" class="login-box timeline-entry">
-      <h2>Simple Login Demo</h2>
+<section id="post-1" class="login-box timeline-entry">
+  <p id="post-1-date" class="date hidden"></p>
+  <h2 id="post-1-title">Simple Login Demo</h2>
+  <p id="post-1-description"></p>
+  <div id="post-1-tags" class="skill-list"></div>
 
-      <div id="login-form">
-        <label for="username">Username</label>
-        <input id="username" type="text" autocomplete="username" />
+  <div id="login-form">
+    <label for="username">Username</label>
+    <input id="username" type="text" autocomplete="username" />
 
-        <label for="password">Password</label>
-        <input id="password" type="password" autocomplete="current-password" />
-      </div>
+    <label for="password">Password</label>
+    <input id="password" type="password" autocomplete="current-password" />
+  </div>
 
-      <button id="auth-button" type="button">Login</button>
+  <button id="auth-button" type="button">Login</button>
 
-      <p id="status-message" class="hidden"></p>
+  <p id="status-message" class="hidden"></p>
 
-      <small>
-        Demo only. This login uses client-side JavaScript and localStorage. It is not secure.
-      </small>
-    </section>
+  <small>
+    Demo only. This login uses client-side JavaScript and localStorage. It is not secure.
+  </small>
+</section>
 
 <section id="post-2" class="timeline-entry hidden">
   <h2>Some Other Demo</h2>
   <p class="date">Coming soon</p>
     <button type="button">Sign in</button>
 </section>
-  <div id="timeline"></div>
   </main>
 
   <script src="auth.js"></script>
