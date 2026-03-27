@@ -24,13 +24,13 @@ function renderSkills(container, skills) {
   });
 }
 
-function populatePostMeta(post) {
+function populatePostMeta(postId, post) {
   if (!post) return;
 
-  const dateEl = document.getElementById('post-1-date');
-  const titleEl = document.getElementById('post-1-title');
-  const descriptionEl = document.getElementById('post-1-description');
-  const tagsEl = document.getElementById('post-1-tags');
+  const dateEl = document.getElementById(`${postId}-date`);
+  const titleEl = document.getElementById(`${postId}-title`);
+  const descriptionEl = document.getElementById(`${postId}-description`);
+  const tagsEl = document.getElementById(`${postId}-tags`);
 
   if (dateEl && post.date) {
     dateEl.textContent = formatDate(post.date);
@@ -58,8 +58,12 @@ async function loadTimelineData() {
     }
 
     const data = await response.json();
+
     const post1 = data.find(item => item.id === 'post-1');
-    populatePostMeta(post1);
+    const post2 = data.find(item => item.id === 'post-2');
+
+    populatePostMeta('post-1', post1);
+    populatePostMeta('post-2', post2);
   } catch (error) {
     console.error('Error loading timeline data:', error);
   }
