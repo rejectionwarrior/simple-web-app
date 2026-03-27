@@ -31,6 +31,7 @@ function populatePostMeta(postId, post) {
   const titleEl = document.getElementById(`${postId}-title`);
   const descriptionEl = document.getElementById(`${postId}-description`);
   const tagsEl = document.getElementById(`${postId}-tags`);
+  const buttonEl = document.getElementById(`${postId}-button`);
 
   if (dateEl && post.date) {
     dateEl.textContent = formatDate(post.date);
@@ -47,6 +48,10 @@ function populatePostMeta(postId, post) {
 
   if (tagsEl) {
     renderSkills(tagsEl, post.skills || []);
+  }
+
+  if (buttonEl && post.buttonLabel) {
+    buttonEl.textContent = post.buttonLabel;
   }
 }
 
