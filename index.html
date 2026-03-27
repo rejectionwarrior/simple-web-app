@@ -4,119 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Simple Web App</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f9f9f9;
-      color: #222;
-    }
-
-    header {
-      background-color: #111;
-      color: white;
-      padding: 2rem 1rem;
-      text-align: center;
-    }
-
-    main {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 2rem 1rem 4rem;
-    }
-
-    .login-box,
-    .timeline-entry {
-      background: white;
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      padding: 1.25rem;
-      margin-bottom: 1.5rem;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-    }
-
-    .login-box h2,
-    .timeline-entry h2 {
-      margin-top: 0;
-    }
-
-    label {
-      display: block;
-      margin-top: 0.75rem;
-      margin-bottom: 0.25rem;
-      font-weight: bold;
-    }
-
-    input {
-      width: 100%;
-      box-sizing: border-box;
-      padding: 0.7rem;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: 1rem;
-    }
-
-    button {
-      margin-top: 1rem;
-      padding: 0.75rem 1rem;
-      border: none;
-      border-radius: 6px;
-      background-color: #111;
-      color: white;
-      font-size: 1rem;
-      cursor: pointer;
-    }
-
-    button:hover {
-      opacity: 0.92;
-    }
-
-    #status-message {
-      margin-top: 1rem;
-      font-weight: bold;
-    }
-
-    .success {
-      color: #0a7a2f;
-    }
-
-    .error {
-      color: #b00020;
-    }
-
-    .date {
-      color: #666;
-      font-size: 0.95rem;
-      margin-bottom: 0.75rem;
-    }
-
-    .hidden {
-      display: none;
-    }
-
-    small {
-      color: #666;
-      display: block;
-      margin-top: 0.75rem;
-      line-height: 1.4;
-    }
-    .skill-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin: 1rem 0;
-}
-
-.skill {
-  display: inline-block;
-  background-color: #f1f1f1;
-  color: #333;
-  border-radius: 999px;
-  padding: 0.35rem 0.7rem;
-  font-size: 0.9rem;
-}
-  </style>
+  <link rel="stylesheet" href="styles.css" />
   <script src="timeline.js"></script>
 </head>
 <body>
@@ -126,37 +14,37 @@
   </header>
 
   <main>
-<section id="post-1" class="login-box timeline-entry">
-  <p id="post-1-date" class="date hidden"></p>
-  <h2 id="post-1-title">Simple Login Demo</h2>
-  <p id="post-1-description"></p>
-  <div id="post-1-tags" class="skill-list"></div>
+    <section id="post-1" class="login-box timeline-entry">
+      <p id="post-1-date" class="date hidden"></p>
+      <h2 id="post-1-title">Simple Login Demo</h2>
+      <p id="post-1-description"></p>
+      <div id="post-1-tags" class="skill-list"></div>
 
-  <div id="login-form">
-    <label for="username">Username</label>
-    <input id="username" type="text" autocomplete="username" />
+      <div id="login-form">
+        <label for="username">Username</label>
+        <input id="username" type="text" autocomplete="username" />
 
-    <label for="password">Password</label>
-    <input id="password" type="password" autocomplete="current-password" />
-  </div>
+        <label for="password">Password</label>
+        <input id="password" type="password" autocomplete="current-password" />
+      </div>
 
-  <button id="auth-button" type="button">Login</button>
+      <button id="auth-button" type="button">Login</button>
 
-  <p id="status-message" class="hidden"></p>
+      <p id="status-message" class="hidden"></p>
 
-  <small>
-    Demo only. This login uses client-side JavaScript and localStorage. It is not secure.
-  </small>
-</section>
-<section id="post-2" class="timeline-entry hidden">
-  <p id="post-2-date" class="date hidden"></p>
-  <h2 id="post-2-title">Some Other Demo</h2>
-  <p id="post-2-description"></p>
-  <div id="post-2-tags" class="skill-list"></div>
+      <small>
+        Demo only. This login uses client-side JavaScript and localStorage. It is not secure.
+      </small>
+    </section>
 
-  <button type="button">Some Other Button</button>
-</section>
+    <section id="post-2" class="timeline-entry hidden">
+      <p id="post-2-date" class="date hidden"></p>
+      <h2 id="post-2-title">Some Other Demo</h2>
+      <p id="post-2-description"></p>
+      <div id="post-2-tags" class="skill-list"></div>
 
+      <button id="post-2-button" type="button">Some Other Button</button>
+    </section>
   </main>
 
   <script src="auth.js"></script>
