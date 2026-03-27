@@ -4,7 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>simple-web-app</title>
-    <meta name="description" content="A simple static site published with GitHub Pages." />
+    <meta name="description" content="A simple static site showcasing skills progression and a login demo." />
+    <link rel="stylesheet" href="timeline.css">
     <style>
       * {
         box-sizing: border-box;
@@ -18,8 +19,8 @@
       }
 
       main {
-        max-width: 680px;
-        margin: 64px auto;
+        max-width: 820px;
+        margin: 48px auto;
         padding: 24px;
         background: #ffffff;
         border: 1px solid #e2e8f0;
@@ -34,6 +35,112 @@
         color: #475569;
       }
 
+      .timeline {
+        position: relative;
+        margin: 32px 0;
+        padding: 0;
+      }
+
+      .timeline::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: #e2e8f0;
+        transform: translateX(-50%);
+      }
+
+      .entry {
+        position: relative;
+        width: 50%;
+        padding: 12px 24px;
+      }
+
+      .entry .card {
+        background: #fff;
+        border: 1px solid #e6edf3;
+        padding: 12px 16px;
+        border-radius: 8px;
+      }
+
+      .entry .date {
+        font-weight: 700;
+        color: #0f172a;
+        margin-bottom: 6px;
+      }
+
+      .entry .desc {
+        color: #334155;
+      }
+
+      .entry-left {
+        left: 0;
+        text-align: right;
+      }
+
+      .entry-right {
+        left: 50%;
+      }
+
+      .entry::after {
+        content: "";
+        position: absolute;
+        top: 18px;
+        width: 12px;
+        height: 12px;
+        background: #fff;
+        border: 2px solid #60a5fa;
+        border-radius: 50%;
+        box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.08);
+      }
+
+      .entry-left::after {
+        right: -6px;
+      }
+
+      .entry-right::after {
+        left: -6px;
+      }
+
+      @media (max-width: 720px) {
+        .timeline::before {
+          left: 20px;
+        }
+
+        .entry {
+          width: 100%;
+          padding-left: 40px;
+          margin-bottom: 18px;
+        }
+
+        .entry-left,
+        .entry-right {
+          left: 0;
+          text-align: left;
+        }
+
+        .entry::after {
+          left: 12px;
+        }
+      }
+
+      .skill-list {
+        margin-top: 8px;
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .skill {
+        background: #eef2ff;
+        color: #3730a3;
+        padding: 4px 8px;
+        border-radius: 999px;
+        font-size: 12px;
+      }
+
       .url {
         display: inline-block;
         margin-top: 12px;
@@ -42,21 +149,68 @@
         background: #e2e8f0;
         color: #0f172a;
         text-decoration: none;
-        word-break: break-all;
       }
 
       .url:hover {
         background: #cbd5e1;
       }
+
+      @media (max-width: 720px) {
+        .skill-list {
+          flex-direction: column;
+        }
+      }
     </style>
   </head>
   <body>
     <main>
-      <h1>simple-web-app is published</h1>
-      <p class="meta">This site is hosted on GitHub Pages and ready to share.</p>
-      <a class="url" href="https://rejectionwarrior.github.io/simple-web-app/">
-        https://rejectionwarrior.github.io/simple-web-app/
-      </a>
+      <h1>Skills Progression Timeline</h1>
+      <p class="meta">A visual timeline showing how my skills grew over time.</p>
+
+      <section id="timeline" class="timeline" aria-label="Skills timeline">
+        <article class="entry entry-left" id="post-1">
+          <div class="card">
+            <div class="date">March 26, 2026</div>
+            <div class="title">Built a client-side login UI</div>
+            <div class="desc">Created a simple login flow with session persistence using localStorage.</div>
+            <div class="skill-list">
+              <span class="skill">JavaScript</span>
+              <span class="skill">localStorage</span>
+              <span class="skill">UI</span>
+            </div>
+            <form id="login-form" style="margin-top: 16px;">
+              <div>
+                <label for="username">Username</label>
+                <input id="username" name="username" required />
+              </div>
+              <div style="margin-top: 8px;">
+                <label for="password">Password</label>
+                <input id="password" name="password" type="password" required />
+              </div>
+              <div style="margin-top: 12px;">
+                <button id="login-button">Log in</button>
+                <button id="logout-button" style="display: none;">Log out</button>
+              </div>
+              <p id="login-error" style="color: #b91c1c; display: none; margin-top: 8px;">Invalid credentials.</p>
+            </form>
+          </div>
+        </article>
+        <article class="entry entry-right" id="post-2" style="display: none;">
+          <div class="card">
+            <div class="date">2023-03</div>
+            <div class="title">Backend basics and APIs</div>
+            <div class="desc">Integrated simple backends and learned REST patterns.</div>
+            <div class="skill-list">
+              <span class="skill">APIs</span>
+              <span class="skill">Node.js</span>
+            </div>
+            <button id="unlock-next" style="margin-top: 12px;">Complete Activity to Unlock Next Post</button>
+          </div>
+        </article>
+      </section>
+
+      <!-- Removed the third blog post -->
     </main>
+    <script src="auth.js"></script>
   </body>
 </html>
