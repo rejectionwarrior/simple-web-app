@@ -1,30 +1,7 @@
 [
   {
-    "date": "2019-01",
-    "title": "Started learning HTML & CSS",
-    "description": "Built simple static pages and learned layouts, box model, and responsive basics.",
-    "skills": ["HTML","CSS"]
-  },
-  {
-    "date": "2020-06",
-    "title": "JavaScript fundamentals",
-    "description": "Learned DOM manipulation, events, and built small interactive widgets.",
-    "skills": ["JavaScript","DOM"]
-  },
-  {
-    "date": "2021-09",
-    "title": "Single-page apps & frameworks",
-    "description": "Explored modern frontend tooling and reactive frameworks.",
-    "skills": ["SPA","Frameworks"]
-  },
-  {
-    "date": "2023-03",
-    "title": "Backend basics and APIs",
-    "description": "Integrated simple backends and learned REST patterns.",
-    "skills": ["APIs","Node.js"]
-  },
-  {
-    "date": "2026-03",
+    "id": "post1",
+    "date": "2026-03-26",
     "title": "Built a client-side login UI",
     "description": "Created a simple login flow with session persistence using localStorage.",
     "skills": ["JavaScript","localStorage","UI"]
