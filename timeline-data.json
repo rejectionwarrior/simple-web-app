@@ -3,7 +3,7 @@
     "id": "post-1",
     "date": "2026-03-26",
     "title": "Simple Login Demo",
-    "description": "Created a simple login flow with session persistence using localStorage.",
+    "description": "A simple login flow with session persistence using localStorage.",
     "skills": ["JavaScript", "localStorage", "UI"]
   },
   {
