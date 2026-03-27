@@ -5,5 +5,12 @@
     "title": "Simple Login Demo",
     "description": "Created a simple login flow with session persistence using localStorage.",
     "skills": ["JavaScript", "localStorage", "UI"]
+  },
+  {
+    "id": "post-2",
+    "date": "2026-03-27",
+    "title": "Some Other Demo",
+    "description": "A second hybrid post with its meta loaded from JSON and its interface kept in HTML.",
+    "skills": ["Forms", "Buttons", "Demo UI"]
   }
 ]
