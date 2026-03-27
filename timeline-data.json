@@ -11,6 +11,7 @@
     "date": "2026-03-27",
     "title": "Some Other Demo",
     "description": "A second hybrid post with its meta loaded from JSON and its interface kept in HTML.",
-    "skills": ["Forms", "Buttons", "Demo UI"]
+    "skills": ["Forms", "Buttons", "Demo UI"],
+    "buttonLabel": "Some Other Button"
   }
 ]
