@@ -1,77 +1,114 @@
-// Simple client-side authentication for demo purposes only.
-// Mock credentials (in a real app, authenticate on the server).
-document.addEventListener('DOMContentLoaded', () => {
-  const DEMO_USERNAME = 'user';
-  const DEMO_PASSWORD = 'pass';
+// auth.js — connects to the Express/Supabase backend
 
-  const loginForm = document.getElementById('login-form');
-  const usernameInput = document.getElementById('username');
-  const passwordInput = document.getElementById('password');
-  const authButton = document.getElementById('auth-button');
-  const statusMessage = document.getElementById('status-message');
-  const post2 = document.getElementById('post-2');
+const BACKEND_URL = 'https://simple-web-app-backend-xcfr.onrender.com';
 
-  function isLoggedIn() {
-    return localStorage.getItem('loggedIn') === 'true';
-  }
+// ── DOM references ──────────────────────────────────────────────────────────
+const loginForm     = document.getElementById('login-form');
+const loggedInView  = document.getElementById('logged-in-view');
+const usernameInput = document.getElementById('username');
+const passwordInput = document.getElementById('password');
+const authButton    = document.getElementById('auth-button');
+const logoutButton  = document.getElementById('logout-button');
+const statusMsg     = document.getElementById('status-message');
+const post2         = document.getElementById('post-2');
+const post2Button   = document.getElementById('post-2-button');
 
-  function setLoggedIn(value) {
-    localStorage.setItem('loggedIn', value ? 'true' : 'false');
-  }
-
-  function clearInputs() {
+// ── Apply auth state to the UI ──────────────────────────────────────────────
+function applyAuthState(loggedIn) {
+  if (loggedIn) {
+    loginForm.classList.add('hidden');
+    loggedInView.classList.remove('hidden');
+    post2.classList.remove('hidden');
+    if (post2Button) {
+      post2Button.classList.add('active');
+      post2Button.disabled = false;
+    }
+  } else {
+    loginForm.classList.remove('hidden');
+    loggedInView.classList.add('hidden');
+    post2.classList.add('hidden');
+    if (post2Button) {
+      post2Button.classList.remove('active');
+      post2Button.disabled = true;
+    }
+    statusMsg.textContent = '';
+    statusMsg.className = 'status';
     usernameInput.value = '';
     passwordInput.value = '';
   }
+}
 
-  function showMessage(message, type) {
-    statusMessage.textContent = message;
-    statusMessage.classList.remove('hidden', 'success', 'error');
-    statusMessage.classList.add(type);
+// ── Login ───────────────────────────────────────────────────────────────────
+async function handleLogin() {
+  const email    = usernameInput.value.trim();
+  const password = passwordInput.value;
+
+  if (!email || !password) {
+    statusMsg.textContent = 'Please enter your email and password.';
+    statusMsg.className = 'status error';
+    return;
   }
 
-  function hideMessage() {
-    statusMessage.textContent = '';
-    statusMessage.classList.add('hidden');
-    statusMessage.classList.remove('success', 'error');
-  }
+  statusMsg.textContent = 'Logging in...';
+  statusMsg.className = 'status';
 
-  function renderUI() {
-    if (isLoggedIn()) {
-      loginForm.classList.add('hidden');
-      authButton.textContent = 'Log out';
-      authButton.classList.remove('hidden');
-      statusMessage.classList.remove('hidden', 'error');
-      statusMessage.classList.add('success');
-      statusMessage.textContent = "You're in! Now you can see what else I've been up to.";
-      post2.classList.remove('hidden');
-    } else {
-      loginForm.classList.remove('hidden');
-      authButton.textContent = 'Login';
-      authButton.classList.remove('hidden');
-      hideMessage();
-      post2.classList.add('hidden');
-      clearInputs();
-    }
-  }
+  try {
+    const response = await fetch(`${BACKEND_URL}/auth/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password })
+    });
 
-  authButton.addEventListener('click', () => {
-    if (isLoggedIn()) {
-      localStorage.removeItem('loggedIn');
-      renderUI();
+    const data = await response.json();
+
+    if (!response.ok) {
+      statusMsg.textContent = data.error || 'Login failed.';
+      statusMsg.className = 'status error';
       return;
     }
 
-    const username = usernameInput.value.trim();
-    const password = passwordInput.value;
+    localStorage.setItem('session_token', data.session.access_token);
+    localStorage.setItem('user_email', email);
+    statusMsg.textContent = 'Login successful.';
+    statusMsg.className = 'status success';
+    setTimeout(() => applyAuthState(true), 300);
 
-    if (username === DEMO_USERNAME && password === DEMO_PASSWORD) {
-      setLoggedIn(true);
-      renderUI();
-    } else {
-      showMessage('Incorrect username or password.', 'error');
+  } catch (err) {
+    statusMsg.textContent = 'Could not reach the server. Please try again.';
+    statusMsg.className = 'status error';
+  }
+}
+
+// ── Logout ──────────────────────────────────────────────────────────────────
+async function handleLogout() {
+  const token = localStorage.getItem('session_token');
+
+  if (token) {
+    try {
+      await fetch(`${BACKEND_URL}/auth/logout`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        }
+      });
+    } catch (err) {
+      console.warn('Logout request failed:', err);
     }
-  });
+  }
 
-  renderUI();
+  localStorage.removeItem('session_token');
+  localStorage.removeItem('user_email');
+  applyAuthState(false);
+}
+
+// ── Event listeners ─────────────────────────────────────────────────────────
+authButton.addEventListener('click', handleLogin);
+logoutButton.addEventListener('click', handleLogout);
+passwordInput.addEventListener('keydown', function (e) {
+  if (e.key === 'Enter') handleLogin();
 });
+
+// ── Restore session on load ─────────────────────────────────────────────────
+const token = localStorage.getItem('session_token');
+applyAuthState(!!token);
