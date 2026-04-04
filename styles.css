@@ -110,3 +110,19 @@ small {
   padding: 0.35rem 0.7rem;
   font-size: 0.9rem;
 }
+.auth-links {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.auth-links a {
+  font-size: 13px;
+  color: #5f5e5a;
+  text-decoration: none;
+}
+
+.auth-links a:hover {
+  text-decoration: underline;
+}
