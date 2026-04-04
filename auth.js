@@ -16,21 +16,13 @@ const post2Button   = document.getElementById('post-2-button');
 // ── Apply auth state to the UI ──────────────────────────────────────────────
 function applyAuthState(loggedIn) {
   if (loggedIn) {
-    loginForm.classList.add('hidden');
-    loggedInView.classList.remove('hidden');
+    showForm('logged-in-view');
     post2.classList.remove('hidden');
-    if (post2Button) {
-      post2Button.classList.add('active');
-      post2Button.disabled = false;
-    }
+    if (post2Button) { post2Button.classList.add('active'); post2Button.disabled = false; }
   } else {
-    loginForm.classList.remove('hidden');
-    loggedInView.classList.add('hidden');
+    showForm('login-form');
     post2.classList.add('hidden');
-    if (post2Button) {
-      post2Button.classList.remove('active');
-      post2Button.disabled = true;
-    }
+    if (post2Button) { post2Button.classList.remove('active'); post2Button.disabled = true; }
     statusMsg.textContent = '';
     statusMsg.className = 'status';
     usernameInput.value = '';
@@ -188,6 +180,33 @@ async function handleResetPassword() {
 }
 
 // ── Event listeners ─────────────────────────────────────────────────────────
+// ── Form switching ───────────────────────────────────────────────────────────
+function showForm(formToShow) {
+  const forms = ['login-form', 'signup-form', 'reset-form', 'logged-in-view'];
+  forms.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.classList.add('hidden');
+  });
+  const target = document.getElementById(formToShow);
+  if (target) target.classList.remove('hidden');
+}
+
+document.getElementById('show-signup').addEventListener('click', e => {
+  e.preventDefault();
+  showForm('signup-form');
+});
+document.getElementById('show-reset').addEventListener('click', e => {
+  e.preventDefault();
+  showForm('reset-form');
+});
+document.getElementById('show-login-from-signup').addEventListener('click', e => {
+  e.preventDefault();
+  showForm('login-form');
+});
+document.getElementById('show-login-from-reset').addEventListener('click', e => {
+  e.preventDefault();
+  showForm('login-form');
+});
 document.getElementById('signup-button').addEventListener('click', handleSignup);
 document.getElementById('reset-button').addEventListener('click', handleResetPassword);
 authButton.addEventListener('click', handleLogin);
