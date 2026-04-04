@@ -101,8 +101,95 @@ async function handleLogout() {
   localStorage.removeItem('user_email');
   applyAuthState(false);
 }
+// ── Signup ──────────────────────────────────────────────────────────────────
+async function handleSignup() {
+  const email    = document.getElementById('signup-email').value.trim();
+  const password = document.getElementById('signup-password').value;
+  const status   = document.getElementById('signup-status');
+
+  if (!email || !password) {
+    status.textContent = 'Please enter an email and password.';
+    status.className = 'status error';
+    return;
+  }
+
+  if (password.length < 6) {
+    status.textContent = 'Password must be at least 6 characters.';
+    status.className = 'status error';
+    return;
+  }
+
+  status.textContent = 'Creating account...';
+  status.className = 'status';
+
+  try {
+    const response = await fetch(`${BACKEND_URL}/auth/signup`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password })
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      status.textContent = data.error || 'Signup failed.';
+      status.className = 'status error';
+      return;
+    }
+
+    status.textContent = 'Account created! You can now log in above.';
+    status.className = 'status success';
+    document.getElementById('signup-email').value = '';
+    document.getElementById('signup-password').value = '';
+
+  } catch (err) {
+    status.textContent = 'Could not reach the server. Please try again.';
+    status.className = 'status error';
+  }
+}
+
+// ── Password Reset ───────────────────────────────────────────────────────────
+async function handleResetPassword() {
+  const email  = document.getElementById('reset-email').value.trim();
+  const status = document.getElementById('reset-status');
+
+  if (!email) {
+    status.textContent = 'Please enter your email address.';
+    status.className = 'status error';
+    return;
+  }
+
+  status.textContent = 'Sending reset email...';
+  status.className = 'status';
+
+  try {
+    const response = await fetch(`${BACKEND_URL}/auth/reset-password`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email })
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      status.textContent = data.error || 'Reset failed.';
+      status.className = 'status error';
+      return;
+    }
+
+    status.textContent = 'Reset email sent! Check your inbox.';
+    status.className = 'status success';
+    document.getElementById('reset-email').value = '';
+
+  } catch (err) {
+    status.textContent = 'Could not reach the server. Please try again.';
+    status.className = 'status error';
+  }
+}
 
 // ── Event listeners ─────────────────────────────────────────────────────────
+document.getElementById('signup-button').addEventListener('click', handleSignup);
+document.getElementById('reset-button').addEventListener('click', handleResetPassword);
 authButton.addEventListener('click', handleLogin);
 logoutButton.addEventListener('click', handleLogout);
 passwordInput.addEventListener('keydown', function (e) {
