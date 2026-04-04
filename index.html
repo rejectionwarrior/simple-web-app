@@ -21,11 +21,16 @@
       <div id="post-1-tags" class="skill-list"></div>
 
       <div id="login-form">
-        <label for="username">Username</label>
-        <input id="username" type="text" autocomplete="username" />
+        <label for="username">Email</label>
+        <input id="username" type="text" placeholder="Email" autocomplete="email" />
 
         <label for="password">Password</label>
-        <input id="password" type="password" autocomplete="current-password" />
+        <input id="password" type="password" placeholder="Password" autocomplete="current-password" />
+      </div>
+
+      <div id="logged-in-view" class="hidden">
+        <span id="logged-in-label">Logged in</span>
+        <button id="logout-button" type="button">Logout</button>
       </div>
 
       <button id="auth-button" type="button">Login</button>
@@ -33,7 +38,7 @@
       <p id="status-message" class="hidden"></p>
 
       <small>
-        Demo only. This login uses client-side JavaScript and localStorage. It is not secure.
+        This login uses real authentication via Supabase. Credentials are not stored client-side.
       </small>
     </section>
 
@@ -44,6 +49,41 @@
       <div id="post-2-tags" class="skill-list"></div>
 
       <button id="post-2-button" type="button">Some Other Button</button>
+    </section>
+
+    <!-- Signup -->
+    <section id="signup-card" class="timeline-entry">
+      <h2>Create an account</h2>
+      <p>Sign up to save your preferences and access all posts.</p>
+
+      <div id="signup-form">
+        <label for="signup-email">Email</label>
+        <input id="signup-email" type="text" placeholder="Email" autocomplete="off" />
+
+        <label for="signup-password">Password</label>
+        <input id="signup-password" type="password" placeholder="Password (min 6 characters)" />
+      </div>
+
+      <button id="signup-button" type="button">Sign up</button>
+
+      <p id="signup-status" class="hidden"></p>
+
+      <small>Already have an account? Just log in above.</small>
+    </section>
+
+    <!-- Password Reset -->
+    <section id="reset-card" class="timeline-entry">
+      <h2>Forgot your password?</h2>
+      <p>Enter your email and we'll send you a reset link.</p>
+
+      <div id="reset-form">
+        <label for="reset-email">Email</label>
+        <input id="reset-email" type="text" placeholder="Email" autocomplete="off" />
+      </div>
+
+      <button id="reset-button" type="button">Send reset email</button>
+
+      <p id="reset-status" class="hidden"></p>
     </section>
   </main>
 
